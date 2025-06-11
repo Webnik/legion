@@ -41,7 +41,7 @@ const ProblemSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-bold text-dark-500 mb-6">
-            Your Team is Drowning in Cost and Repetitive Work
+            Your Team is Drowning in Cost and Repetitive Work. Let's Fix That
           </h2>
         </motion.div>
 

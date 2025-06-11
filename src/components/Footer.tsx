@@ -139,7 +139,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-xl font-semibold mb-2">Stay Updated</h3>
-              <p className="text-gray-400">Get the latest insights on AI and automation</p>
+              <p className="text-gray-400">Get the latest insights about AI employees, AI innnovation, and automation</p>
             </div>
             <div className="flex gap-3 w-full md:w-auto max-w-md">
               <input

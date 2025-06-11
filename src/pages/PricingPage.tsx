@@ -208,7 +208,7 @@ const PricingPage = () => {
                 </ul>
 
                 <button className="w-full btn-primary">
-                  Add {employee.name} to Team
+                  Add {employee.name} to the Team
                 </button>
               </motion.div>
             ))}
