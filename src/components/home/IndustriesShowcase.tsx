@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   Home, 
@@ -17,19 +18,95 @@ import {
 
 const IndustriesShowcase = () => {
   const industries = [
-    { icon: Home, name: 'Real Estate', savings: 'Save 65% on operations', color: 'from-blue-500 to-blue-600' },
-    { icon: Heart, name: 'Healthcare', savings: 'Save 70% on admin', color: 'from-red-500 to-red-600' },
-    { icon: ShoppingBag, name: 'E-commerce', savings: 'Save 60% on support', color: 'from-green-500 to-green-600' },
-    { icon: Briefcase, name: 'Professional Services', savings: 'Save 55% on billing', color: 'from-purple-500 to-purple-600' },
-    { icon: GraduationCap, name: 'Education', savings: 'Save 50% on admin', color: 'from-indigo-500 to-indigo-600' },
-    { icon: Car, name: 'Automotive', savings: 'Save 45% on scheduling', color: 'from-orange-500 to-orange-600' },
-    { icon: Utensils, name: 'Restaurants', savings: 'Save 40% on ordering', color: 'from-yellow-500 to-yellow-600' },
-    { icon: Building, name: 'Construction', savings: 'Save 50% on project mgmt', color: 'from-gray-500 to-gray-600' },
-    { icon: Palette, name: 'Creative Agencies', savings: 'Save 35% on client mgmt', color: 'from-pink-500 to-pink-600' },
-    { icon: Wrench, name: 'Manufacturing', savings: 'Save 60% on logistics', color: 'from-teal-500 to-teal-600' },
-    { icon: Scale, name: 'Legal', savings: 'Save 55% on research', color: 'from-indigo-500 to-purple-600' },
-    { icon: Zap, name: 'Technology', savings: 'Save 45% on operations', color: 'from-cyan-500 to-blue-600' }
+    { 
+      icon: Home, 
+      name: 'Real Estate', 
+      savings: 'Save 65% on operations', 
+      color: 'from-blue-500 to-blue-600',
+      path: '/industries/real-estate'
+    },
+    { 
+      icon: Heart, 
+      name: 'Healthcare', 
+      savings: 'Save 70% on admin', 
+      color: 'from-red-500 to-red-600',
+      path: '/industries/healthcare'
+    },
+    { 
+      icon: ShoppingBag, 
+      name: 'E-commerce', 
+      savings: 'Save 60% on support', 
+      color: 'from-green-500 to-green-600',
+      path: '/industries/ecommerce'
+    },
+    { 
+      icon: Briefcase, 
+      name: 'Professional Services', 
+      savings: 'Save 55% on billing', 
+      color: 'from-purple-500 to-purple-600',
+      path: '/industries/professional-services'
+    },
+    { 
+      icon: GraduationCap, 
+      name: 'Education', 
+      savings: 'Save 50% on admin', 
+      color: 'from-indigo-500 to-indigo-600',
+      path: '/industries'
+    },
+    { 
+      icon: Car, 
+      name: 'Automotive', 
+      savings: 'Save 45% on scheduling', 
+      color: 'from-orange-500 to-orange-600',
+      path: '/industries'
+    },
+    { 
+      icon: Utensils, 
+      name: 'Restaurants', 
+      savings: 'Save 40% on ordering', 
+      color: 'from-yellow-500 to-yellow-600',
+      path: '/industries/restaurants'
+    },
+    { 
+      icon: Building, 
+      name: 'Construction', 
+      savings: 'Save 50% on project mgmt', 
+      color: 'from-gray-500 to-gray-600',
+      path: '/industries/construction'
+    },
+    { 
+      icon: Palette, 
+      name: 'Creative Agencies', 
+      savings: 'Save 35% on client mgmt', 
+      color: 'from-pink-500 to-pink-600',
+      path: '/industries/creative-agencies'
+    },
+    { 
+      icon: Wrench, 
+      name: 'Manufacturing', 
+      savings: 'Save 60% on logistics', 
+      color: 'from-teal-500 to-teal-600',
+      path: '/industries/manufacturing'
+    },
+    { 
+      icon: Scale, 
+      name: 'Legal', 
+      savings: 'Save 55% on research', 
+      color: 'from-indigo-500 to-purple-600',
+      path: '/industries/legal'
+    },
+    { 
+      icon: Zap, 
+      name: 'Technology', 
+      savings: 'Save 45% on operations', 
+      color: 'from-cyan-500 to-blue-600',
+      path: '/industries/technology'
+    }
   ];
+
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <section className="section-padding bg-dark-500">
@@ -61,7 +138,11 @@ const IndustriesShowcase = () => {
               whileHover={{ scale: 1.05, y: -5 }}
               className="group"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all duration-300 cursor-pointer">
+              <Link
+                to={industry.path}
+                onClick={handleLinkClick}
+                className="block bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all duration-300 cursor-pointer"
+              >
                 <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${industry.color} mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <industry.icon className="w-8 h-8 text-white" />
                 </div>
@@ -71,7 +152,7 @@ const IndustriesShowcase = () => {
                 <p className="text-secondary-400 text-sm font-medium">
                   {industry.savings}
                 </p>
-              </div>
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -83,9 +164,13 @@ const IndustriesShowcase = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <button className="btn-primary text-lg px-8 py-4">
+          <Link
+            to="/industries"
+            onClick={handleLinkClick}
+            className="btn-primary text-lg px-8 py-4"
+          >
             Explore Industry Solutions
-          </button>
+          </Link>
         </motion.div>
       </div>
     </section>

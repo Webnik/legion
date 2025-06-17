@@ -23,7 +23,7 @@ const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: 'AI Employees', path: '/' },
+    { name: 'AI Employees', path: '/ai-employees' },
     { 
       name: 'Industries', 
       path: '/industries',
@@ -32,6 +32,12 @@ const Navigation = () => {
         { name: 'Healthcare', path: '/industries/healthcare' },
         { name: 'E-commerce', path: '/industries/ecommerce' },
         { name: 'Professional Services', path: '/industries/professional-services' },
+        { name: 'Restaurants', path: '/industries/restaurants' },
+        { name: 'Construction', path: '/industries/construction' },
+        { name: 'Creative Agencies', path: '/industries/creative-agencies' },
+        { name: 'Manufacturing', path: '/industries/manufacturing' },
+        { name: 'Legal', path: '/industries/legal' },
+        { name: 'Technology', path: '/industries/technology' },
         { name: 'All Industries', path: '/industries' }
       ]
     },
@@ -46,12 +52,12 @@ const Navigation = () => {
       ]
     },
     { name: 'Pricing', path: '/pricing' },
-    { name: 'Resources', path: '/resources' },
     { 
       name: 'About', 
       path: '/about',
       submenu: [
         { name: 'About Us', path: '/about' },
+        { name: 'Resources', path: '/resources' },
         { name: 'Careers', path: '/careers' },
         { name: 'Contact', path: '/contact' }
       ]
@@ -93,6 +99,32 @@ const Navigation = () => {
     setOpenDropdown(openDropdown === itemName ? null : itemName);
   };
 
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
+    setOpenDropdown(null);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderSubmenu = (submenu: any[], parentName: string, isNested = false) => {
+    return (
+      <div className={`${isNested ? 'ml-4' : ''}`}>
+        {submenu.map((subItem) => (
+          <div key={subItem.name}>
+            <Link
+              to={subItem.path}
+              onClick={handleLinkClick}
+              className={`block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200 ${
+                location.pathname === subItem.path ? 'bg-primary-50 text-primary-600' : ''
+              }`}
+            >
+              {subItem.name}
+            </Link>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -101,7 +133,7 @@ const Navigation = () => {
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" onClick={handleLinkClick} className="flex items-center space-x-2">
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg">
                 <Bot className="w-6 h-6 text-white" />
               </div>
@@ -141,6 +173,7 @@ const Navigation = () => {
                           <Link
                             key={subItem.name}
                             to={subItem.path}
+                            onClick={handleLinkClick}
                             className={`block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors duration-200 ${
                               location.pathname === subItem.path ? 'bg-primary-50 text-primary-600' : ''
                             }`}
@@ -153,6 +186,7 @@ const Navigation = () => {
                   ) : (
                     <Link
                       to={item.path}
+                      onClick={handleLinkClick}
                       className={`font-medium transition-colors duration-300 hover:text-primary-500 ${
                         location.pathname === item.path
                           ? 'text-primary-500'
@@ -204,25 +238,14 @@ const Navigation = () => {
                         </button>
                         {openDropdown === item.name && (
                           <div className="bg-gray-50">
-                            {item.submenu.map((subItem) => (
-                              <Link
-                                key={subItem.name}
-                                to={subItem.path}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className={`block px-8 py-2 text-gray-700 hover:text-primary-500 hover:bg-primary-50 transition-colors duration-300 ${
-                                  location.pathname === subItem.path ? 'text-primary-500 bg-primary-50' : ''
-                                }`}
-                              >
-                                {subItem.name}
-                              </Link>
-                            ))}
+                            {renderSubmenu(item.submenu, item.name)}
                           </div>
                         )}
                       </div>
                     ) : (
                       <Link
                         to={item.path}
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={handleLinkClick}
                         className={`block px-4 py-2 font-medium transition-colors duration-300 hover:text-primary-500 hover:bg-primary-50 ${
                           location.pathname === item.path ? 'text-primary-500 bg-primary-50' : 'text-dark-500'
                         }`}
